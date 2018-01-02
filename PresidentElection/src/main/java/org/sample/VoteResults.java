@@ -17,7 +17,7 @@ public class VoteResults {
     private Map<String, Integer> winners(String fullFileName) throws FileNotFoundException {
         InputStream is = new FileInputStream(new File(fullFileName));
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        Map<String, Integer> candidateToVotesSumSorted = br.lines().
+        return br.lines().
                 map(mapToItem).
                 filter(x -> x.getOffice().contains("PRESIDENT AND VICE PRESIDENT OF THE UNITED STATES")).
                 collect(Collectors.groupingBy(ElectionItem::getCanidate, Collectors.
@@ -33,11 +33,6 @@ public class VoteResults {
                         (e1, e2) -> e1,
                         LinkedHashMap::new
                 ));
-
-        for (String key : candidateToVotesSumSorted.keySet()) {
-            System.out.println("--  Name : " + key + " Votes:" + candidateToVotesSumSorted.get(key));
-        }
-        return candidateToVotesSumSorted;
     }
 
     public Function<String, ElectionItem> mapToItem = (line) -> {
