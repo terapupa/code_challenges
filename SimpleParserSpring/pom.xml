@@ -6,7 +6,11 @@
 
     <groupId>WalletHub</groupId>
     <artifactId>SimpleParserSpring</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>../PresidentElection</module>
+    </modules>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

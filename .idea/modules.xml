@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/PresidentElection/PresidentElection.iml" filepath="$PROJECT_DIR$/PresidentElection/PresidentElection.iml" />
       <module fileurl="file://$PROJECT_DIR$/SimpleParser/SimpleParser.iml" filepath="$PROJECT_DIR$/SimpleParser/SimpleParser.iml" />
       <module fileurl="file://$PROJECT_DIR$/SimpleParserSpring/SimpleParserSpring.iml" filepath="$PROJECT_DIR$/SimpleParserSpring/SimpleParserSpring.iml" />
     </modules>
