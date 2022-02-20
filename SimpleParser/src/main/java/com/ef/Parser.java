@@ -89,7 +89,7 @@ public class Parser {
 
     private BufferedReader getAccessLogBufferReader() {
         try {
-            return new BufferedReader(new InputStreamReader(new FileInputStream(new File(accesslog))));
+            return new BufferedReader(new InputStreamReader(new FileInputStream(accesslog)));
         } catch (FileNotFoundException e) {
             printError(e.getMessage(), true);
         }
