@@ -1,0 +1,8 @@
+
+dependencies {
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '5.1.25'
+    implementation group: 'commons-dbutils', name: 'commons-dbutils', version: '1.6'
+
+}

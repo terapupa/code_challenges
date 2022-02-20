@@ -1,0 +1,8 @@
+include 'AlmostSortedLondSequence'
+include 'PresidentElection'
+include 'ShoppingCart'
+include 'SimpleParser'
+include 'SimpleParserSpring'
+
+rootProject.name = 'code_challenges'
+

@@ -55,7 +55,7 @@ public class ParsingService {
         int threshold = 0;
         try {
             date = (new SimpleDateFormat("yyyy-MM-dd.HH:mm:ss")).parse(environment.getProperty(START_DATE_OPT));
-            threshold = Integer.valueOf(environment.getProperty(THRESHOLD_OPT));
+            threshold = Integer.parseInt(environment.getProperty(THRESHOLD_OPT));
         } catch (Exception e) {
             printError(e.getMessage(), true);
         }
@@ -63,7 +63,7 @@ public class ParsingService {
         String startTimeStr = format.format(date);
         Duration duration = Duration.valueOf(environment.getProperty(DURATION_OPT));
         String endTimeStr = format.format(new Date(date.getTime() + Duration.getTimeMillis(duration)));
-        List l = requestRepository.findExceededIps(startTimeStr, endTimeStr, threshold);
+        List<?> l = requestRepository.findExceededIps(startTimeStr, endTimeStr, threshold);
         for (Object exceededIp : l)
         {
             String ip = (String)((Object[])exceededIp)[0];
@@ -87,7 +87,7 @@ public class ParsingService {
 
     private BufferedReader getAccessLogBufferReader() {
         try {
-            return new BufferedReader(new InputStreamReader(new FileInputStream(new File(environment.getProperty(Commandline.ACCESS_LOG_OPT)))));
+            return new BufferedReader(new InputStreamReader(new FileInputStream(environment.getProperty(Commandline.ACCESS_LOG_OPT))));
         } catch (FileNotFoundException e) {
             printError(e.getMessage(), true);
         }
@@ -103,13 +103,13 @@ public class ParsingService {
                 .map(mapToItem)
                 .forEach(item -> {
                     if (items.size() == 1000) {
-                        requestRepository.save(items);
+                        requestRepository.saveAll(items);
                         System.out.println(items.size() + " records added to the table 'Request'...");
                         items.clear();
                     }
                     items.add(item);
                 });
-        requestRepository.save(items);
+        requestRepository.saveAll(items);
         System.out.println(items.size() + " records added to the table 'Request'...");
         requestRepository.flush();
     }
@@ -124,7 +124,7 @@ public class ParsingService {
         return ret;
     }
 
-    private Function<String, Request> mapToItem = (line) -> {
+    private final Function<String, Request> mapToItem = (line) -> {
         String[] values = StringUtils.split(line, "|");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         try {

@@ -48,18 +48,17 @@ public class ShoppingCart {
     terminal.setPricing("D", 1, 0.15f);
     terminal.setPricing("D", 50, 5f);
 
-//    terminal.scan("A");
-//    terminal.scan("B");
-//    terminal.scan("C");
-//    terminal.scan("D");
+    terminal.scan("A");
+    terminal.scan("B");
+    terminal.scan("C");
+    terminal.scan("D");
     terminal.scan("A");
     terminal.scan("A");
     terminal.scan("A");
     terminal.scan("A");
     terminal.scan("A");
-//    terminal.scan("A");
-//    terminal.scan("A");
-//    terminal.scan("A");
+    terminal.scan("B");
+    terminal.scan("B");
 
     System.out.println("Total : $" + terminal.getTotal());
   }
