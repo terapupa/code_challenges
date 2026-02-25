@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 import java.util.function.Function;
 
 public class Parser {
@@ -100,7 +101,7 @@ public class Parser {
         ArrayList<RequestItem> items = new ArrayList<>();
         try {
             dbOperations.createConnectionAndStatement();
-            getAccessLogBufferReader()
+            Objects.requireNonNull(getAccessLogBufferReader())
                     .lines()
                     .map(mapToItem)
                     .forEach(item -> {
@@ -118,7 +119,7 @@ public class Parser {
         }
     }
 
-    private Function<String, RequestItem> mapToItem = (line) -> {
+    private final Function<String, RequestItem> mapToItem = (line) -> {
         String[] values = StringUtils.split(line, "|");
         return new RequestItem(values[1].trim(), values[0].trim());
     };

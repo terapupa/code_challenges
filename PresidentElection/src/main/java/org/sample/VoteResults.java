@@ -16,7 +16,7 @@ public class VoteResults {
         return br.lines().
                 map(mapToItem).
                 filter(x -> x.getOffice().contains("PRESIDENT AND VICE PRESIDENT OF THE UNITED STATES")).
-                collect(Collectors.groupingBy(ElectionItem::getCanidate, Collectors.
+                collect(Collectors.groupingBy(ElectionItem::getCandidate, Collectors.
                         reducing(0, ElectionItem::getVotes, Integer::sum))).
                 entrySet().
                 stream().
@@ -31,26 +31,24 @@ public class VoteResults {
                 ));
     }
 
-    public Function<String, ElectionItem> mapToItem = (line) -> {
+    private final Function<String, ElectionItem> mapToItem = (line) -> {
         String[] p = line.split(",");
         try {
-            return new ElectionItem(p[3], p[4], p[5], Integer.parseInt(p[6]));
+            return new ElectionItem(p[3], p[4], Integer.parseInt(p[6]));
         } catch (NumberFormatException e) {
-            return new ElectionItem(p[3], p[4], p[5], -1);
+            return new ElectionItem(p[3], p[4], -1);
         }
     };
 
-    private class ElectionItem {
-        private String office;
-        private String canidate;
-        private String party;
+    private static class ElectionItem {
+        private final String office;
+        private final String candidate;
         private Integer votes = -1;
 
         public ElectionItem(String office,
-                            String canidate, String party, Integer votes) {
+                            String candidate, Integer votes) {
             this.office = office;
-            this.canidate = canidate;
-            this.party = party;
+            this.candidate = candidate;
             this.votes = votes;
         }
 
@@ -58,8 +56,8 @@ public class VoteResults {
             return this.office;
         }
 
-        String getCanidate() {
-            return this.canidate;
+        String getCandidate() {
+            return this.candidate;
         }
 
         Integer getVotes() {
@@ -71,7 +69,7 @@ public class VoteResults {
     public static void main(String[] args) {
         try {
             VoteResults t = new VoteResults();
-            Map<String, Integer> resMap = t.winners("/Users/vsamot200/Downloads/2012_general.csv");
+            Map<String, Integer> resMap = t.winners("/Users/terapupa/workspace/personal/code_challenges/PresidentElection/src/main/resources/2012_general.csv");
             for (String key : resMap.keySet()) {
                 System.out.println("Name : " + key + " Votes:" + resMap.get(key));
             }
