@@ -31,7 +31,7 @@ public class DbOperations {
     public DbOperations() {
         Properties dbProps = new Properties();
         try {
-            dbProps.load(Properties.class.getResourceAsStream("/db.properties"));
+            dbProps.load(DbOperations.class.getClassLoader().getResourceAsStream("db.properties"));
             Class.forName(dbProps.getProperty("DB_DRIVER_CLASS"));
         } catch (IOException | ClassNotFoundException e) {
             printError(e.getMessage(), true);

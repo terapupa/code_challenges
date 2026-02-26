@@ -21,17 +21,22 @@ allprojects {
         mavenCentral()
     }
 
-dependencies {
-    implementation group: 'com.opencsv', name: 'opencsv', version: '5.5.2'
-    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.6.4'
+    dependencies {
+        implementation group: 'com.opencsv', name: 'opencsv', version: '5.5.2'
+        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.6.4'
 
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion",
-            "org.mockito:mockito-core:$mockitoVersion",
-            "org.mockito:mockito-junit-jupiter:$mockitoVersion",
-            "org.junit.jupiter:junit-jupiter-params:$junitVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+        testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion",
+                "org.mockito:mockito-core:$mockitoVersion",
+                "org.mockito:mockito-junit-jupiter:$mockitoVersion",
+                "org.junit.jupiter:junit-jupiter-params:$junitVersion"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion",
+                "org.junit.platform:junit-platform-console:1.8.2"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
 //    implementation group: 'io.github.resilience4j', name: 'resilience4j-core', version: '1.5.0'
 //    implementation group: 'io.github.resilience4j', name: 'resilience4j-retry', version: '1.5.0'
-}
